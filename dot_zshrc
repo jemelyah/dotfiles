@@ -12,7 +12,6 @@ source /usr/local/opt/fzf/shell/key-bindings.zsh
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
-eval "$(gh copilot alias -- zsh)"
 
 # Bindings
 
@@ -66,7 +65,13 @@ alias decompress="tar -xzf"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Bitwarden (personal/work kept as fully separate CLI sessions)
-alias bw-personal='BITWARDENCLI_APPDATA_DIR=~/.config/bw/personal bw'
-alias bw-work='BITWARDENCLI_APPDATA_DIR=~/.config/bw/work bw'
-bwu() { export BW_SESSION=$(bw unlock --raw) }
+# Bitwarden (personal/work kept as fully separate CLI sessions, each with its own BW_SESSION)
+bw-personal() { BITWARDENCLI_APPDATA_DIR=~/.config/bw/personal BW_SESSION="$BW_SESSION_PERSONAL" bw "$@" }
+bw-work() { BITWARDENCLI_APPDATA_DIR=~/.config/bw/work BW_SESSION="$BW_SESSION_WORK" bw "$@" }
+bwu() {
+  case "$1" in
+    personal) export BW_SESSION_PERSONAL=$(BITWARDENCLI_APPDATA_DIR=~/.config/bw/personal bw unlock --raw) ;;
+    work) export BW_SESSION_WORK=$(BITWARDENCLI_APPDATA_DIR=~/.config/bw/work bw unlock --raw) ;;
+    *) echo "usage: bwu personal|work" >&2; return 1 ;;
+  esac
+}
