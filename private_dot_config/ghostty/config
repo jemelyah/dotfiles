@@ -1,0 +1,11 @@
+# Theme deliberately left unset for now — sync with Neovim's theme in Phase 4
+# rather than guessing one now. Run `ghostty +list-themes` to pick one later.
+
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+
+shell-integration = detect
+
+# Avoid native macOS tabs: AeroSpace treats each tab as its own window, which
+# fights the tiling layout. Everything multiplexed lives in tmux instead.
+keybind = cmd+t=unbind

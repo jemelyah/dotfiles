@@ -1,0 +1,7 @@
+{{- if eq .profile "personal" }}
+{{- range list "catalyst-ui-kit" "gift" "oatmeal-olive-instrument" "parachutes-development" "ruby_llm" "scribe" "slowexpo" "tautasbulta" "zima" }}
+[[session]]
+name = {{ . | quote }}
+path = {{ printf "%s/parachutes/%s" $.chezmoi.homeDir . | quote }}
+{{ end -}}
+{{- end -}}
