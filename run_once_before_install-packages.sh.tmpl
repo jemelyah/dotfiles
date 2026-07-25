@@ -1,5 +1,8 @@
 #!/bin/bash
+brew trust --tap nikitabobko/tap FelixKratz/formulae
 brew bundle --file=/dev/stdin <<'EOF'
+tap "nikitabobko/tap"
+tap "FelixKratz/formulae"
 brew "mise"
 brew "fzf"
 brew "zoxide"
@@ -8,7 +11,10 @@ brew "btop"
 brew "lazygit"
 brew "gh"
 brew "bitwarden-cli"
+cask "nikitabobko/tap/aerospace"
+brew "FelixKratz/formulae/sketchybar"
 {{ if eq .profile "work" }}
 # work-only formulae/casks added in a later phase
 {{ end -}}
 EOF
+brew services start sketchybar

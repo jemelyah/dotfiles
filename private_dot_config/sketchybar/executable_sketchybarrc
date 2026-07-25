@@ -1,0 +1,37 @@
+#!/bin/bash
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+sketchybar --bar height=32 blur_radius=20 position=top padding_left=8 padding_right=8
+
+sketchybar --add event aerospace_workspace_change
+
+for sid in browser terminal obsidian logos music; do
+  sketchybar --add item space.$sid left \
+    --subscribe space.$sid aerospace_workspace_change \
+    --set space.$sid label="$sid" \
+                     icon.font="JetBrainsMono Nerd Font:Regular:14.0" \
+                     label.font="JetBrainsMono Nerd Font:Regular:12.0" \
+                     script="$PLUGIN_DIR/aerospace.sh" \
+                     click_script="aerospace workspace $sid"
+done
+
+sketchybar --add item battery right \
+  --set battery update_freq=30 \
+               icon.font="JetBrainsMono Nerd Font:Regular:14.0" \
+               script="$PLUGIN_DIR/battery.sh"
+
+sketchybar --add item clock right \
+  --set clock update_freq=10 \
+             script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item layout right \
+  --subscribe layout aerospace_workspace_change \
+  --set layout script="$PLUGIN_DIR/layout.sh"
+
+sketchybar --add item volume right \
+  --subscribe volume volume_change \
+  --set volume icon.font="JetBrainsMono Nerd Font:Regular:14.0" \
+              script="$PLUGIN_DIR/volume.sh"
+
+sketchybar --update
