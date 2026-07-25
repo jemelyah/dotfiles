@@ -12,7 +12,8 @@ sketchybar --bar height=32 \
                  y_offset=4 \
                  padding_left=8 \
                  padding_right=8 \
-                 blur_radius=30
+                 blur_radius=30 \
+                 topmost=window
 
 sketchybar --default \
   icon.font="$FONT:Bold:13.0" \
