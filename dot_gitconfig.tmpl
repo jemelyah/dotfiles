@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Aleksandr Emelianov
+	email = jemelyah@gmail.com
+{{ if eq .profile "work" }}
+[includeIf "gitdir/i:~/rails/"]
+	path = ~/.config/git/work
+[includeIf "gitdir/i:~/rubygems/"]
+	path = ~/.config/git/work
+[includeIf "gitdir/i:~/java/"]
+	path = ~/.config/git/work
+{{ end -}}

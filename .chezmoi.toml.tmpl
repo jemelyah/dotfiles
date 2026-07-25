@@ -1,0 +1,3 @@
+{{- $profile := promptStringOnce . "profile" "Profile (personal/work)" "personal" -}}
+[data]
+    profile = {{ $profile | quote }}

@@ -1,0 +1,72 @@
+# Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
+# ZSH_THEME="robbyrussell"
+plugins=(git)
+
+
+source $ZSH/oh-my-zsh.sh
+source /usr/local/opt/fzf/shell/key-bindings.zsh
+# source ~/history-search.zsh
+
+# Evals
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(mise activate zsh)"
+eval "$(gh copilot alias -- zsh)"
+
+# Bindings
+
+# File system
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias cd="zd"
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~ && return
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
+  fi
+}
+open() {
+  xdg-open "$@" >/dev/null 2>&1 &
+}
+
+# Directories
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Tools
+alias d='docker'
+alias r='rails'
+n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+# alias ghe="gh copilot explain"
+# alias ghs="gh copilot suggest"
+
+# Git
+alias g='git'
+alias gcm='git commit -m'
+alias gcam='git commit -a -m'
+alias gcad='git commit -a --amend'
+
+# Compression
+compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
+alias decompress="tar -xzf"
+
+
+# bun completions
+[ -s "/Users/jemelyah/.bun/_bun" ] && source "/Users/jemelyah/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Bitwarden (personal/work kept as fully separate CLI sessions)
+alias bw-personal='BITWARDENCLI_APPDATA_DIR=~/.config/bw/personal bw'
+alias bw-work='BITWARDENCLI_APPDATA_DIR=~/.config/bw/work bw'
+bwu() { export BW_SESSION=$(bw unlock --raw) }
