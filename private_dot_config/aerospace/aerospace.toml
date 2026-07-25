@@ -1,8 +1,6 @@
 config-version = 2
 start-at-login = true
 after-startup-command = []
-exec-on-workspace-change = ['/bin/bash', '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
 
 persistent-workspaces = ['browser', 'terminal', 'obsidian', 'logos', 'music']
 
