@@ -1,4 +1,5 @@
 {
+    "workbench.colorTheme": "Catppuccin Mocha",
     "github.copilot.nextEditSuggestions.enabled": true,
     "editor.fontFamily": "'JetBrains Mono'", //, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 14,

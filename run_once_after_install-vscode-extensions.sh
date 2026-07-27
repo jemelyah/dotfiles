@@ -5,6 +5,7 @@ extensions=(
   anthropic.claude-code
   asvetliakov.vscode-neovim
   britesnow.vscode-toggle-quotes
+  catppuccin.catppuccin-vsc
   eamodio.gitlens
   marcoroth.herb-lsp
   ms-azuretools.vscode-containers
