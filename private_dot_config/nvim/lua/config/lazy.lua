@@ -18,8 +18,7 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.test.core" },
-    { import = "lazyvim.plugins.extras.lang.ruby" },
+    -- test.core and lang.ruby extras are enabled via lazyvim.json, loaded automatically
     -- import/override with your plugins
     { import = "plugins" },
   },

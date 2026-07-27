@@ -1,7 +1,7 @@
 {
   "extras": [
-    "test.core",
-    "lang.ruby"
+    "lazyvim.plugins.extras.test.core",
+    "lazyvim.plugins.extras.lang.ruby"
   ],
   "install_version": 8,
   "news": {
