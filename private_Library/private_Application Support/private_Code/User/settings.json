@@ -1,0 +1,23 @@
+{
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "editor.fontFamily": "'JetBrains Mono'", //, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.fontLigatures": false,
+    "editor.fontVariations": false,
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "workbench.iconTheme": "icons",
+    "rubyLsp.formatter": "rubocop",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "git.confirmSync": false,
+    "editor.rulers": [
+        130
+    ],
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "claudeCode.preferredLocation": "panel",
+    "chat.viewSessions.orientation": "stacked",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "claudeCode.selectedModel": "default",
+    "claudeCode.enableNewConversationShortcut": true,
+}
