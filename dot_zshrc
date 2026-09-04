@@ -75,3 +75,4 @@ bwu() {
     *) echo "usage: bwu personal|work" >&2; return 1 ;;
   esac
 }
+export PATH="/Users/jemelyah/.local/bin:$PATH"
