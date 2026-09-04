@@ -5,6 +5,5 @@ font-size = 14
 
 shell-integration = detect
 
-# Avoid native macOS tabs: AeroSpace treats each tab as its own window, which
-# fights the tiling layout. Everything multiplexed lives in tmux instead.
+# Avoid native macOS tabs: everything multiplexed lives in tmux instead.
 keybind = cmd+t=unbind
