@@ -6,9 +6,9 @@ local directions = {
 
 -- The explorer's input/list windows bind <c-j>/<c-k> to list_down/list_up
 -- (plain j/k already do this), which wins over the global tmux-navigator
--- window-nav maps from vim-tmux-navigator.lua — same root cause as the AI
--- pane fix there, just via a normal buffer-local keymap instead of terminal
--- capture. Free up ctrl-hjkl for window navigation.
+-- window-nav maps from vim-tmux-navigator.lua — same root cause as the
+-- snacks-terminal nav fix there, just via a normal buffer-local keymap
+-- instead of terminal capture. Free up ctrl-hjkl for window navigation.
 local nav_keys = {}
 for dir, cmd in pairs(directions) do
   nav_keys["<c-" .. dir .. ">"] = function()
@@ -32,6 +32,21 @@ end
 
 return {
   "folke/snacks.nvim",
+  -- init runs during spec processing, early enough to catch VimEnter —
+  -- registering this in config/autocmds.lua (loaded on VeryLazy) would be
+  -- too late, since VeryLazy fires after VimEnter.
+  init = function()
+    -- Open the explorer on bare `nvim` starts, next to the dashboard.
+    -- Skipped when files are passed (argc > 0) or the window is narrow.
+    vim.api.nvim_create_autocmd("VimEnter", {
+      group = vim.api.nvim_create_augroup("snacks_explorer_autopen", { clear = true }),
+      callback = function()
+        if vim.fn.argc() == 0 and vim.o.columns >= 120 then
+          require("snacks").explorer.open()
+        end
+      end,
+    })
+  end,
   opts = {
     picker = {
       sources = {
