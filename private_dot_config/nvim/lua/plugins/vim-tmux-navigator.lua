@@ -42,9 +42,9 @@ return {
     keys = keys,
   },
 
-  -- claudecode.nvim and opencode.nvim both render their panel as a
-  -- snacks.terminal, where LazyVim installs buffer-local <C-hjkl> maps that win
-  -- over the global ones above. Replace them with the tmux-aware equivalents.
+  -- LazyVim installs buffer-local <C-hjkl> maps in snacks.terminal windows
+  -- that win over the global ones above. Replace them with the tmux-aware
+  -- equivalents so any terminal window navigates like everything else.
   {
     "folke/snacks.nvim",
     opts = {
