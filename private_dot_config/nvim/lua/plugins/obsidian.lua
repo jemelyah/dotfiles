@@ -1,4 +1,5 @@
-local vault = vim.fn.expand("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Emelianotes")
+local personal_vault = vim.fn.expand("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Emelianotes")
+local work_vault = vim.fn.expand("~/Library/Mobile Documents/iCloud~md~obsidian/Documents/eazyBI")
 
 return {
   {
@@ -9,9 +10,13 @@ return {
     opts = {
       -- Only the space-separated `Obsidian <subcommand>` style is used below.
       legacy_commands = false,
-      -- One entry today; add a second { name = "work", path = "..." } here
-      -- once the work vault's real path exists — nothing else to restructure.
-      workspaces = { { name = "Emelianotes", path = vault } },
+      -- obsidian.nvim picks the active workspace by cwd, so listing both
+      -- unconditionally (not profile-templated) is fine — the personal-machine
+      -- entry for the work vault just never resolves to anything.
+      workspaces = {
+        { name = "Emelianotes", path = personal_vault },
+        { name = "eazyBI", path = work_vault },
+      },
       daily_notes = {
         folder = "Calendar/Notes/Daily",
         default_tags = {},

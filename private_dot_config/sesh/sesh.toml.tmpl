@@ -4,4 +4,9 @@
 name = {{ . | quote }}
 path = {{ printf "%s/parachutes/%s" $.chezmoi.homeDir . | quote }}
 {{ end -}}
+{{- else if eq .profile "work" }}
+{{- /* Fill in real project names here once known on the work machine —
+     same [[session]] pattern as personal above, just rooted at one of
+     ~/rails, ~/rubygems, ~/java instead of ~/parachutes. Until then sesh
+     still finds work projects via its zoxide-history fallback. */ -}}
 {{- end -}}
