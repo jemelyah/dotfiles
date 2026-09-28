@@ -28,9 +28,6 @@ architect=$(tmux split-window -h -d -t "$planner" -p 50 -P -F '#{pane_id}')
 tmux set-option -p -t "$coder" @agent_role coder
 tmux set-option -p -t "$planner" @agent_role planner
 tmux set-option -p -t "$architect" @agent_role architect
-tmux select-pane -t "$coder" -T coder
-tmux select-pane -t "$planner" -T planner
-tmux select-pane -t "$architect" -T architect
 
 tmux send-keys -t "$nvim" 'nvim' C-m
 tmux send-keys -t "$coder" 'claude --model sonnet' C-m
