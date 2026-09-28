@@ -8,6 +8,8 @@ You may be running inside a tmux pane created by `~/.config/tmux/agent-layout.sh
 - `planner` — Claude Code (sonnet)
 - `architect` — Claude Code (opus)
 
+Addressing is scoped to your own tmux **window**, not the whole session — two layouts running in different windows of the same session never collide, even if both have a `coder`. `agent-msg.sh` resolves this via `-t "$TMUX_PANE"`, so it must run from inside a tmux pane (fails loudly otherwise), and it refuses to guess if it somehow finds more than one pane with the same role in your window.
+
 Message a sibling agent pane:
 
 ```bash
@@ -18,7 +20,7 @@ Message a sibling agent pane:
 Read a sibling's recent output:
 
 ```bash
-tmux list-panes -s -F '#{pane_id} #{@agent_role}'
+tmux list-panes -t "$TMUX_PANE" -F '#{pane_id} #{@agent_role}'   # panes in your own window only
 tmux capture-pane -p -t <pane_id>          # add -S -100 for more scrollback
 ```
 
