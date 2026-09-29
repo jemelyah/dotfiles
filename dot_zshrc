@@ -76,3 +76,12 @@ bwu() {
   esac
 }
 export PATH="/Users/jemelyah/.local/bin:$PATH"
+
+# Dev plugin profile: plugins other than playwright are enabled only for sessions under ~/parachutes
+claude() {
+  if [[ $PWD == $HOME/parachutes* ]]; then
+    command claude --settings ~/.config/claude/dev-plugins.json "$@"
+  else
+    command claude "$@"
+  fi
+}
