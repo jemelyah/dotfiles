@@ -34,6 +34,6 @@ tmux send-keys -t "$coder" 'claude --model sonnet' C-m
 # Planner/architect hand work over via agent-msg.sh: keep replies short and pass file paths, not pasted content.
 brief="Reply concisely. When handing work to another agent pane, reference file paths or plan files instead of pasting content."
 tmux send-keys -t "$planner" "claude --model sonnet --append-system-prompt '$brief'" C-m
-tmux send-keys -t "$architect" "claude --model opus --append-system-prompt '$brief'" C-m
+tmux send-keys -t "$architect" "claude --model opus --permission-mode plan --append-system-prompt '$brief'" C-m
 
 tmux select-pane -t "$nvim"
