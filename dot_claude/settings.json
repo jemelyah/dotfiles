@@ -1,0 +1,42 @@
+{
+  "model": "sonnet",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.config/claude/context-warn.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "playwright@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "37signals": {
+      "source": {
+        "source": "github",
+        "repo": "basecamp/claude-plugins"
+      }
+    },
+    "c-guard-local": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/jemelyah/parachutes/c-guard"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": false,
+  "tui": "fullscreen",
+  "theme": "dark-ansi",
+  "teammateMode": "in-process",
+  "agentPushNotifEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.config/claude/statusline.sh"
+  },
+  "outputStyle": "Concise"
+}
