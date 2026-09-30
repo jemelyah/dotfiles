@@ -47,7 +47,9 @@ jq '{mcpServers: {"obsidian-mcp-server": .projects[$HOME].mcpServers["obsidian-m
 
 tmux send-keys -t "$coder" "claude --model sonnet --strict-mcp-config --mcp-config $mcp_none" C-m
 # Planner/architect hand work over via agent-msg.sh: keep replies short and pass file paths, not pasted content.
-brief="Reply concisely. When handing work to another agent pane, reference file paths or plan files instead of pasting content."
+# Spelled out explicitly (not just "use agent-msg.sh") because agents otherwise try to locate a peer by tmux
+# session/window name (e.g. "gift:@27") and get stuck disambiguating — agent-msg.sh needs a role, not a name.
+brief="Reply concisely. To hand work to another agent pane, run: agent-msg.sh <role> \"<message or file path>\" where <role> is coder, planner, or architect. Do not look for a tmux session/window by name — agent-msg.sh resolves the target itself from the role tag, scoped to this window."
 tmux send-keys -t "$planner" "claude --model sonnet --strict-mcp-config --mcp-config $mcp_none --append-system-prompt '$brief'" C-m
 tmux send-keys -t "$architect" "claude --model opus --permission-mode plan --strict-mcp-config --mcp-config $mcp_architect --append-system-prompt '$brief'" C-m
 
