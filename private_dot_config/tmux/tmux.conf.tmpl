@@ -3,9 +3,10 @@ unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
 
-# Split panes: | for horizontal, - for vertical
-bind | split-window -h
-bind - split-window -v
+# Split panes: | for horizontal, - for vertical; new panes and windows keep the current directory
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
 unbind '"'
 unbind %
 
@@ -19,14 +20,37 @@ set -g mouse on
 set -g base-index 1
 setw -g pane-base-index 1
 
+set -g allow-rename off
+set -g history-limit 10000
+set -sg escape-time 10
+
+# Switch to another session instead of detaching when the current one is killed.
+set -g detach-on-destroy off
+
 # True color + undercurl passthrough (Ghostty reports TERM=xterm-ghostty)
 set -g default-terminal "tmux-256color"
 set -as terminal-features ",xterm-ghostty:RGB"
 set -as terminal-features ",xterm-ghostty:usstyle"
 
-# sesh: fuzzy project/session switcher
-bind-key "s" run-shell "sesh connect \"$(sesh list --icons | fzf-tmux -p 80%,70% --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' --preview-window 'right:55%' --preview 'sesh preview {}')\""
+# sesh: fuzzy project/session switcher. Ctrl-a is the tmux prefix, so ctrl-s reloads the full list.
+bind-key s run-shell "sesh connect \"$(
+  sesh list --icons | fzf-tmux -p 80%,70% \
+    --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+    --header '  ^s all ^t tmux ^g configs ^x zoxide ^d tmux kill' \
+    --bind 'tab:down,btab:up' \
+    --bind 'ctrl-s:change-prompt(⚡  )+reload(sesh list --icons)' \
+    --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+    --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+    --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+    --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+    --preview-window 'right:55%' \
+    --preview 'sesh preview {}'
+)\""
 
+{{ if eq .profile "work" -}}
+# The agent workspace on work is eazyherd: roles, pane borders and ctrl+hjkl navigation.
+source-file -q ~/.eazyherd/include/eazyherd.tmux.conf
+{{- else -}}
 # Agent layout: nvim + shell on top; coder/planner/architect agent panes
 # below (agent-layout.sh). Message agent panes with agent-msg.sh <role> "text".
 bind-key D run-shell "~/.config/tmux/agent-layout.sh"
@@ -36,11 +60,14 @@ bind-key D run-shell "~/.config/tmux/agent-layout.sh"
 # pane_title/select-pane -T, which zsh overwrites almost immediately.
 set -g pane-border-status top
 set -g pane-border-format '#{?@agent_role,#[bold] #{@agent_role} #[nobold],  #{pane_current_command}  }'
+{{- end }}
 
 # tpm plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
+{{- if ne .profile "work" }}
 set -g @plugin 'christoomey/vim-tmux-navigator'
+{{- end }}
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-yank'
