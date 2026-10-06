@@ -5,7 +5,7 @@ plugins=(git)
 
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/opt/fzf/shell/key-bindings.zsh
+source {{ template "brew-prefix" . }}/opt/fzf/shell/key-bindings.zsh
 # source ~/history-search.zsh
 
 # Evals
