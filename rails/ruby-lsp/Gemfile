@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gem "ruby-lsp"
+gem "rubocop", "1.59"
+gem "rubocop-performance"
+gem "rubocop-rails"

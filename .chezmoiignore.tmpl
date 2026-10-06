@@ -1,6 +1,10 @@
 .ssh
 README.md
 
+{{- if ne .profile "work" }}
+rails
+{{- end }}
+
 {{- /* The agent pane stack and these agent files are personal only. On work, eazyherd provides the agent workspace. */}}
 {{- if eq .profile "work" }}
 .config/tmux/agent-layout.sh

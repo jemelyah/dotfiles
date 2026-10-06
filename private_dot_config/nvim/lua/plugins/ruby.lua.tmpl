@@ -6,8 +6,23 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+{{- if eq .profile "work" }}
+        -- Work projects run on JRuby, which cannot run ruby-lsp. Both servers run on MRI
+        -- from the dedicated ~/rails/ruby-lsp bundle instead (the mise global Ruby).
+        ruby_lsp = {
+          mason = false,
+          cmd = { "mise", "exec", "ruby@3.4.5", "--", "bundle", "exec", "ruby-lsp" },
+          cmd_env = { BUNDLE_GEMFILE = vim.fn.expand("~/rails/ruby-lsp/Gemfile") },
+        },
+        rubocop = {
+          mason = false,
+          cmd = { "mise", "exec", "ruby@3.4.5", "--", "bundle", "exec", "rubocop", "--lsp" },
+          cmd_env = { BUNDLE_GEMFILE = vim.fn.expand("~/rails/ruby-lsp/Gemfile") },
+        },
+{{- else }}
         ruby_lsp = { mason = false },
         rubocop = { mason = false },
+{{- end }}
       },
     },
   },
