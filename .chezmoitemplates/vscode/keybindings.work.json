@@ -1,0 +1,16 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "shift+alt+cmd+b",
+    "command": "claude-vscode.editor.openLast",
+    "when": "!config.claudeCode.useTerminal"
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\u001b\r"
+    },
+    "when": "terminalFocus"
+}
+]

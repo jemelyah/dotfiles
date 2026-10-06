@@ -1,0 +1,2 @@
+{{- /* VSCode is a fallback editor and will be dropped; until then each profile keeps its own settings. */ -}}
+{{- includeTemplate (printf "vscode/settings.%s.json" .profile) . -}}

@@ -1,0 +1,42 @@
+#!/bin/bash
+{{ if eq .profile "work" -}}
+extensions=(
+  anthropic.claude-code
+  apility.beautify-blade
+  britesnow.vscode-toggle-quotes
+  docker.docker
+  eamodio.gitlens
+  github.vscode-github-actions
+  github.vscode-pull-request-github
+  karunamurti.haml
+  marcoroth.herb-lsp
+  ms-azuretools.vscode-containers
+  ms-azuretools.vscode-docker
+  ms-vscode-remote.remote-containers
+  naumovs.color-highlight
+  shopify.ruby-lsp
+  slb235.vscode-coffeelint
+  sst-dev.opencode
+  tamasfe.even-better-toml
+  tomoki1207.pdf
+  vscode-icons-team.vscode-icons
+)
+{{- else -}}
+code --sync off
+
+extensions=(
+  anthropic.claude-code
+  asvetliakov.vscode-neovim
+  britesnow.vscode-toggle-quotes
+  catppuccin.catppuccin-vsc
+  eamodio.gitlens
+  marcoroth.herb-lsp
+  ms-azuretools.vscode-containers
+  ms-vscode-remote.remote-containers
+  shopify.ruby-lsp
+  tal7aouy.icons
+){{ end }}
+
+for ext in "${extensions[@]}"; do
+  code --install-extension "$ext"
+done
