@@ -8,6 +8,8 @@ source $ZSH/oh-my-zsh.sh
 source {{ template "brew-prefix" . }}/opt/fzf/shell/key-bindings.zsh
 # source ~/history-search.zsh
 
+export EDITOR='nvim'
+
 # Evals
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
@@ -80,7 +82,6 @@ export PATH="/Users/jemelyah/.local/bin:$PATH"
 {{ if eq .profile "work" -}}
 # Work: eazyherd, Atlassian products, JVM, gcloud, nvm, qlty
 export PATH="$HOME/bin:$PATH"
-export EDITOR='code'
 export LANG=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
@@ -94,20 +95,8 @@ alias killjira="ps -ax | grep jira | awk -F' ' '{print $1}' | xargs kill -9"
 alias killz="kill -9 %1"
 
 export PATH="$PATH:$HOME/java/atlassian-plugin-sdk/bin"
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-export PATH="$PATH:$JAVA_HOME/bin"
+# mise sets JAVA_HOME, globally and per project. Switch the shell with `mise shell java@temurin-11`.
 export JAVA_OPTS="-Xms2g -Xmx3g -XX:ReservedCodeCacheSize=300m -Dfile.encoding=UTF-8"
-switch_java() {
-  local version=$1
-  if [[ $version -lt 10 ]]; then
-    version="1.$version"
-  fi
-  local new_home=$(/usr/libexec/java_home -X -v $version | xmllint --xpath "//plist/array/dict/string[3]/text()" - | xargs 2&> /dev/null)
-  if [[ $new_home != $JAVA_HOME ]]; then
-    export JAVA_HOME=$new_home
-    echo "new JAVA_HOME=$JAVA_HOME"
-  fi
-}
 
 source "{{ template "brew-prefix" . }}/share/google-cloud-sdk/path.zsh.inc"
 source "{{ template "brew-prefix" . }}/share/google-cloud-sdk/completion.zsh.inc"
