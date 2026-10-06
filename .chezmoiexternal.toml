@@ -1,0 +1,21 @@
+# Neovim spell files for the non-English languages in spelllang (options.lua). LazyVim disables netrw, so Neovim cannot download them itself.
+
+[".local/share/nvim/site/spell/ru.utf-8.spl"]
+    type = "file"
+    url = "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.spl"
+
+[".local/share/nvim/site/spell/ru.utf-8.sug"]
+    type = "file"
+    url = "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.sug"
+
+[".local/share/nvim/site/spell/es.utf-8.spl"]
+    type = "file"
+    url = "https://ftp.nluug.nl/pub/vim/runtime/spell/es.utf-8.spl"
+
+[".local/share/nvim/site/spell/es.utf-8.sug"]
+    type = "file"
+    url = "https://ftp.nluug.nl/pub/vim/runtime/spell/es.utf-8.sug"
+
+[".local/share/nvim/site/spell/lv.utf-8.spl"]
+    type = "file"
+    url = "https://ftp.nluug.nl/pub/vim/runtime/spell/lv.utf-8.spl"
