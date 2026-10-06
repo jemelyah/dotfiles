@@ -1,10 +1,6 @@
 .ssh
 README.md
 
-{{- if ne .profile "work" }}
-.config/git/work
-{{- end }}
-
 {{- /* Agent CLAUDE.md, settings and opencode.json come in per-profile variants from .chezmoitemplates. These files belong only to the personal profile. */}}
 {{- if eq .profile "work" }}
 .claude/memory

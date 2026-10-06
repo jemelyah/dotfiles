@@ -1,6 +1,15 @@
 # This is Git's per-user configuration file.
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg = !"git lg1"
+	pr = "!f() { git fetch -fu origin \"refs/pull/$1/head:pr/$1\" && git checkout \"pr/$1\" && git branch -u \"origin/$(gh pr view \"$1\" --json headRefName -q .headRefName)\"; }; f"
+	pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	pr-push = "!f() { u=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null); if [ -n \"$u\" ]; then b=${u#origin/}; else n=$(git rev-parse --abbrev-ref HEAD); case \"$n\" in pr/*) b=$(gh pr view \"${n#pr/}\" --json headRefName -q .headRefName);; esac; fi; if [ -z \"$b\" ]; then echo \"pr-push: cannot determine remote branch\" >&2; exit 1; fi; git push -u origin \"HEAD:$b\"; }; f"
+	list-merged-branches = !git branch --merged | egrep -v '(^\\*|master)'
+	delete-merged-branches = !git branch --merged | egrep -v '(^\\*|master)' | xargs git branch -d
 [user]
-	name = Aleksandr Emelianov
+	name = {{ if eq .profile "work" }}Aleksandrs Jemeljanovs{{ else }}Aleksandr Emelianov{{ end }}
 	email = jemelyah@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -13,11 +22,7 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !{{ template "brew-prefix" . }}/bin/gh auth git-credential
-{{ if eq .profile "work" }}
-[includeIf "gitdir/i:~/rails/"]
-	path = ~/.config/git/work
-[includeIf "gitdir/i:~/rubygems/"]
-	path = ~/.config/git/work
-[includeIf "gitdir/i:~/java/"]
-	path = ~/.config/git/work
+{{ if eq .profile "work" -}}
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 {{ end -}}
