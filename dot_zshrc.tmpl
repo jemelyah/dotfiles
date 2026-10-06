@@ -80,7 +80,7 @@ bwu() {
 export PATH="/Users/jemelyah/.local/bin:$PATH"
 
 {{ if eq .profile "work" -}}
-# Work: eazyherd, Atlassian products, JVM, gcloud, nvm, qlty
+# Work: eazyherd, Atlassian products, JVM, gcloud, qlty
 export PATH="$HOME/bin:$PATH"
 export LANG=en_US.UTF-8
 export CLICOLOR=1
@@ -100,10 +100,6 @@ export JAVA_OPTS="-Xms2g -Xmx3g -XX:ReservedCodeCacheSize=300m -Dfile.encoding=U
 
 source "{{ template "brew-prefix" . }}/share/google-cloud-sdk/path.zsh.inc"
 source "{{ template "brew-prefix" . }}/share/google-cloud-sdk/completion.zsh.inc"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "{{ template "brew-prefix" . }}/opt/nvm/nvm.sh" ] && . "{{ template "brew-prefix" . }}/opt/nvm/nvm.sh"
-[ -s "{{ template "brew-prefix" . }}/opt/nvm/etc/bash_completion.d/nvm" ] && . "{{ template "brew-prefix" . }}/opt/nvm/etc/bash_completion.d/nvm"
 
 source ~/rails/eazybi/bin/git_helpers.sh
 
