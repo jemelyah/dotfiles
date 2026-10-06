@@ -5,8 +5,10 @@ name = {{ . | quote }}
 path = {{ printf "%s/parachutes/%s" $.chezmoi.homeDir . | quote }}
 {{ end -}}
 {{- else if eq .profile "work" }}
-{{- /* Fill in real project names here once known on the work machine —
-     same [[session]] pattern as personal above, just rooted at one of
-     ~/rails, ~/rubygems, ~/java instead of ~/parachutes. Until then sesh
-     still finds work projects via its zoxide-history fallback. */ -}}
+{{- /* Main repos only. eazyherd creates the eazybi--* branch worktrees, and sesh finds them through zoxide. */}}
+{{- range list "rails/eazybi" "rails/eazy_cube" "rails/eazybi_confluence" "rails/eazybi_hosted" "rails/eazybi_jira" "rails/eazybi_p2" "rails/eazybi_private" "rails/eazybi_translations" "rubygems/eazybi_helpscout_firefox_extension" "rubygems/ferrum" "rubygems/mondrian-olap" "rubygems/multipass" "java/docker-images" "java/jdoc" "java/mydockerconfluence" "java/mydockerjira" }}
+[[session]]
+name = {{ base . | quote }}
+path = {{ joinPath $.chezmoi.homeDir . | quote }}
+{{ end -}}
 {{- end -}}
