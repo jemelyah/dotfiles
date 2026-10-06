@@ -11,11 +11,13 @@
 [user]
 	name = {{ if eq .profile "work" }}Aleksandrs Jemeljanovs{{ else }}Aleksandr Emelianov{{ end }}
 	email = jemelyah@gmail.com
+{{ if eq .profile "work" -}}
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+{{ end -}}
 [credential "https://github.com"]
 	helper = 
 	helper = !{{ template "brew-prefix" . }}/bin/gh auth git-credential
