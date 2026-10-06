@@ -4,6 +4,3 @@ font-family = JetBrainsMono Nerd Font
 font-size = 14
 
 shell-integration = detect
-
-# Avoid native macOS tabs: everything multiplexed lives in tmux instead.
-keybind = cmd+t=unbind
