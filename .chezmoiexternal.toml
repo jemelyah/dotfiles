@@ -3,19 +3,24 @@
 [".local/share/nvim/site/spell/ru.utf-8.spl"]
     type = "file"
     url = "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.spl"
+    checksum.sha256 = "eb2d3bd78a2020b30bcc0a7cfebdacebfb7a427581114f66b88a577ae6dac54d"
 
 [".local/share/nvim/site/spell/ru.utf-8.sug"]
     type = "file"
     url = "https://ftp.nluug.nl/pub/vim/runtime/spell/ru.utf-8.sug"
+    checksum.sha256 = "eabd86168ad85d5bfb8068808cf7982bab0374afc299cb49ecc89d71616f393b"
 
 [".local/share/nvim/site/spell/es.utf-8.spl"]
     type = "file"
     url = "https://ftp.nluug.nl/pub/vim/runtime/spell/es.utf-8.spl"
+    checksum.sha256 = "963637ac925cf8a51bf207fac392d6b4c69795711dcc2d4809b78846ae367be3"
 
 [".local/share/nvim/site/spell/es.utf-8.sug"]
     type = "file"
     url = "https://ftp.nluug.nl/pub/vim/runtime/spell/es.utf-8.sug"
+    checksum.sha256 = "e70f3478aa653c2ae905086328fbff4e43bd646d76534645f50a65344801bd6c"
 
 [".local/share/nvim/site/spell/lv.utf-8.spl"]
     type = "file"
     url = "https://ftp.nluug.nl/pub/vim/runtime/spell/lv.utf-8.spl"
+    checksum.sha256 = "ead53a2f16ccc0de517ac4af9ac2884779647f2786fb68e35671511bf9c28817"
