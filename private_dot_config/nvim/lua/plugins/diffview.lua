@@ -53,5 +53,17 @@ return {
   -- diffview gives a navigable, VSCode-Source-Control-style review UI.
   opts = {
     enhanced_diff_hl = true, -- word-level highlighting inside changed lines
+    hooks = {
+      -- Diffview reuses an already loaded buffer for the working tree side. A buffer that a
+      -- plugin loaded with autocommands disabled never ran filetype detection, so it would
+      -- show without syntax highlighting and without its LSP clients.
+      diff_buf_read = function(bufnr)
+        if vim.bo[bufnr].filetype == "" then
+          vim.api.nvim_buf_call(bufnr, function()
+            vim.cmd("filetype detect")
+          end)
+        end
+      end,
+    },
   },
 }
